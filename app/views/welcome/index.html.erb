@@ -1,2 +1,18 @@
 <h1>Welcome#index</h1>
 <p>Find me in app/views/welcome/index.html.erb</p>
+
+<button type="button" name="btn-login" class="btn btn-success">
+  <i class="fa fa-user"></i>
+  Login
+</button>
+
+<%= simple_form_for(:user, html: { class: 'form-horizontal' }) do |form|%>
+
+<% end %>
+
+<%= content_tag :a, "Modal", href: "#modal", class: 'btn btn-primary', data: {toggle: 'modal'} %>
+
+<%= modal_dialog id: "modal",
+         header: { show_close: true, dismiss: 'modal', title: 'Modal header' },
+         body:   { content: 'This is the body' },
+         footer: { content: content_tag(:button, 'Save', class: 'btn') } %>

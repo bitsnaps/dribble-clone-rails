@@ -1,28 +1,61 @@
-== README
+== Dribble Clone (Rails v4)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Steps:
+- Add ruby gems
+- Configure bootstrap:
+```
+generate bootstrap:install static
+```
+- Generate bootstrap layout template
+```
+rails g bootstrap:layout application
+```
+- Configure simple_form:
+```
+rails generate simple_form:install
+# or with bootstrap
+rails generate simple_form:install --bootstrap
+```
+- Configure devise
+```
+rails generate devise:install
+```
+then add `config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }`
+to `config/environments/development.rb` file.
+- Customize Login/Logout pages:
+```
+rails generate devise:views
+```
+Generate User Model
+```
+rails generate devise User
+rake db:migrate
 
-Things you may want to cover:
+# Add name field to user table
+rails g migration AddFieldsToUsers name:string
+rake db:migrate
+```
 
-* Ruby version
+Create Shot model:
+```
+rails g scaffold Shot title:string description:text user_id:integer
+```
 
-* System dependencies
+Add has_many to User:
+```
+  has_many :shots, dependent: :destroy # delete shots if the user gets deleted
+```
 
-* Configuration
+Add belongs_to to Shot:
+```
+  belongs_to :user
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+rake db:migrate
+```
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Tested on:
+* Ruby version: 2.3.7
+* Database: SQLite3
