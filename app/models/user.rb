@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   has_many :shots, dependent: :destroy # delete shots if the user gets deleted
+  has_many :comments, dependent: :destroy
 end

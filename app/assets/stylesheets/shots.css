@@ -1,0 +1,29 @@
+// Place all the styles related to the Shots controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#drop_zone{
+  height: 200px;
+  border-width: 2px;
+  margin-bottom: 20px;
+}
+
+/* skin.css Style*/
+#drop_zone{
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+#drop_zone.drop {
+  color: #222;
+  border-color: #222;
+}
+/*#shot_user_shot {
+  display: none;
+}*/
+
+.btn-action {
+  width: 80px;
+  margin-top: 1px;
+}

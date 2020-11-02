@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :shots
+
+  # get 'comments/create'
+  # get 'comments/destroy'
+
+  resources :shots do
+    # nested route
+    resources :comments # shot/1/comment/3
+  end
+
   devise_for :users, controllers: { registrations: 'registrations'}
   # get 'welcome/index'
 

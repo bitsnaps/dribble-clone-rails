@@ -1,29 +1,45 @@
-<h1>Listing shots</h1>
+<h1 class="page-header">List of Shots</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Title</th>
+      <th>Thumbnail</th>
       <th>Description</th>
       <th>User</th>
-      <th colspan="3"></th>
+      <th>Date</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @shots.each do |shot| %>
       <tr>
-        <td><%= shot.title %></td>
-        <td><%= shot.description %></td>
-        <td><%= shot.user_id %></td>
-        <td><%= link_to 'Show', shot %></td>
-        <td><%= link_to 'Edit', edit_shot_path(shot) %></td>
-        <td><%= link_to 'Destroy', shot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to shot.title, shot %></td>
+        <td><%= image_tag(shot.user_shot_url) %></td>
+        <td><%= truncate(shot.description, length: 50) %></td>
+        <td>
+          <% if shot.user %>
+            <%= gravatar_image_tag(shot.user.email.gsub('spam', 'mdeering'), alt: shot.user.name, gravatar: {size: 20}) %>
+            <%= shot.user.name unless shot.user.name.blank? %>
+          <% end %>
+        </td>
+        <td><%= time_ago_in_words(shot.created_at) %></td>
+        <td>
+          <%= link_to 'Show', shot, class: 'btn btn-sm btn-success btn-action' %> <br>
+          <%= link_to 'Edit', edit_shot_path(shot), class: 'btn btn-sm btn-primary btn-action' %> <br>
+          <%= link_to 'Destroy', shot, class: 'btn btn-sm btn-danger btn-action', method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+        <td>
+          <span class="icon"><i class="fa fa-comment"></i></span>
+          <%= shot.comments.count %>
+          <span class="icon"><i class="fa fa-eye"></i></span>
+          <span class="icon"><i class="fa fa-heart"></i></span>
+        </td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Shot', new_shot_path %>

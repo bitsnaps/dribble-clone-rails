@@ -1,11 +1,25 @@
 
-<%= simple_form_for(@shot) do |f| %>
+<%= simple_form_for(shot, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+
   <%= f.error_notification %>
+
+  <% unless shot.user_shot.blank? %>
+    <%= image_tag (shot.user_shot.url), id: 'previewImage' %>
+  <% end %>
+
+  <div class="form-inputs">
+    <output id="list"></output>
+    <div id="drop_zone">Drag your shot here</div>
+  </div>
+  <br>
+
+  <div class="form-inputs">
+    <%= f.input :user_shot, label: false, input_html: { class: 'file-input', type: 'file' }, wrapper: false %>
+  </div>
 
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.input :user_id %>
   </div>
 
   <div class="form-actions">

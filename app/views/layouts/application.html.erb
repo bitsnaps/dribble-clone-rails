@@ -40,18 +40,41 @@
 
     <div class="navbar navbar-default navbar-inverse navbar-static-top">
       <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">RailsProd</a>
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= url_for root_path %>">Dribble Clone</a>
+        </div>
+
         <div class="navbar-collapse collapse navbar-responsive-collapse">
+
           <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "About", "/welcome/about"  %></li>
+            <% if user_signed_in? %>
+            <li><%= link_to "Users", new_user_registration_path  %></li>
+            <li><%= link_to "Shots", "/shots"  %></li>
+
+            <% end %>
           </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <li>
+              <%= link_to new_shot_path do  %>
+                <span class="icon is-small"><i class="fa fa-upload"></i> New Shot</span>
+              <% end %>
+            </li>
+            <li><%= link_to (current_user.name or 'Profil'), edit_user_registration_path %></li>
+              <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to 'Sing In', new_user_session_path %></li>
+              <li><%= link_to 'Sing Up', new_user_registration_path %></li>
+            <% end %>
+          </ul>
+
         </div>
       </div>
     </div>
@@ -62,7 +85,8 @@
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-        <div class="col-lg-3">
+        <%= yield(:stat) %>
+        <!-- <div class="col-lg-3">
           <div class="well sidebar-nav">
             <h3>Sidebar</h3>
             <ul class="nav nav-list">
@@ -71,12 +95,16 @@
               <li><%= link_to "Link2", "/path2"  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
+          </div><!--/.well --
+        </div><!--/col-lg-3 -->
+
       </div><!--/row-->
 
+
+      <br>
+      <br>
       <footer>
-        <p>&copy; Company 2020</p>
+        <p>Company &copy; <%= Time.now.year %></p>
       </footer>
 
     </div> <!-- /container -->

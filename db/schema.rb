@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201030203053) do
+ActiveRecord::Schema.define(version: 20201102163824) do
+
+  create_table "comments", force: true do |t|
+    t.string   "name"
+    t.text     "response"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "shot_id"
+    t.integer  "user_id"
+  end
 
   create_table "shots", force: true do |t|
     t.string   "title"
@@ -19,6 +28,7 @@ ActiveRecord::Schema.define(version: 20201030203053) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "user_shot"
   end
 
   create_table "users", force: true do |t|

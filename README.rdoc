@@ -55,6 +55,19 @@ Add belongs_to to Shot:
 rake db:migrate
 ```
 
+- Generate file uploader (using CarrierWave gem)
+```
+rails generate uploader user_shot
+```
+
+- Create comments controller
+```
+rails g controller comments create destroy
+rails g model Comment name:string response:text
+rails g migration AddShotIdToComments
+rails g migration AddUserIdToComments
+rake db:migrate
+```
 
 Tested on:
 * Ruby version: 2.3.7
