@@ -5,6 +5,7 @@ class Shot < ActiveRecord::Base
   mount_uploader :user_shot, UserShotUploader
 
   is_impressionable
+  is_impressionable #:counter_cache => true # need to add "counter_cache" column to the table
   acts_as_votable
 
 end
