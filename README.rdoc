@@ -1,7 +1,10 @@
-== Dribble Clone (Rails v4)
+## Dribble Clone (Rails v4 and bootstrap3)
+
+Original example (Rails v5 and Bulma) by Andy Leverenz
+https://github.com/justalever/dribbble_clone
 
 Steps:
-- Add ruby gems
+- Add ruby gems (checkout `Gemfile`)
 - Configure bootstrap:
 ```
 generate bootstrap:install static
@@ -26,12 +29,15 @@ to `config/environments/development.rb` file.
 ```
 rails generate devise:views
 ```
-Generate User Model
+
+- Generate User Model:
 ```
 rails generate devise User
 rake db:migrate
+```
 
-# Add name field to user table
+- Add name field to user table:
+```
 rails g migration AddFieldsToUsers name:string
 rake db:migrate
 ```
@@ -51,6 +57,7 @@ Add belongs_to to Shot:
   belongs_to :user
 ```
 
+- Update migration:
 ```
 rake db:migrate
 ```
@@ -81,6 +88,9 @@ rails generate acts_as_votable:migration
 rake db:migrate
 ```
 
-Tested on:
-* Ruby version: 2.3.7
-* Database: SQLite3
+Known issues:
+- impressionist raises an [exception](https://github.com/charlotte-ruby/impressionist/issues/103) on show shot page.
+
+Tested with:
+* Ruby v2.3.7 & Rails v4.1.16
+* Database: SQLite3.
