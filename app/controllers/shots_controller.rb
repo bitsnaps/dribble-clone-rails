@@ -1,8 +1,9 @@
 class ShotsController < ApplicationController
-  before_action :set_shot, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :set_shot, only: [:show, :edit, :update, :destroy, :like, :unlike]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :like, :unlike]
+  impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @shots = Shot.all.order('created_at DESC')
@@ -22,7 +23,7 @@ class ShotsController < ApplicationController
   end
 
   def create
-    @shot = current_user.shot.build(shot_params)
+    @shot = current_user.shots.build(shot_params)
     # for HTML response
     @shot.save
     respond_with(@shot)
@@ -69,6 +70,24 @@ class ShotsController < ApplicationController
     # end
   end
 
+  def like
+    @shot.liked_by current_user
+    respond_to do |format|
+          format.html { redirect_to :back } # rails v4
+          # format.html { redirect_back fallback_location: root_path } # rails v5
+          format.json { render layout:false }
+    end
+  end
+
+  def unlike
+    @shot.unliked_by current_user
+    respond_to do |format|
+          format.html { redirect_to :back } # rails v4
+          # format.html { redirect_back fallback_location: root_path } # rails v5
+          format.json { render layout:false }
+    end
+  end
+
   private
     def set_shot
       @shot = Shot.find(params[:id])
@@ -77,4 +96,5 @@ class ShotsController < ApplicationController
     def shot_params
       params.require(:shot).permit(:title, :description, :user_id)
     end
+
 end

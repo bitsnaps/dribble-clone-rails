@@ -69,6 +69,18 @@ rails g migration AddUserIdToComments
 rake db:migrate
 ```
 
+- Generate impression table (for likes)
+```
+rails g impressionist
+rake db:migrate
+```
+
+- Generate votes table
+```
+rails generate acts_as_votable:migration
+rake db:migrate
+```
+
 Tested on:
 * Ruby version: 2.3.7
 * Database: SQLite3

@@ -86,7 +86,7 @@ gem 'carrierwave', '~> 1.3.1'
 gem 'simple_form', '~> 3.5.1' # '~> 5.0.3', '>= 5.0.3'
 
 # Log impressions
-gem 'impressionist', '~> 2.0'
+gem 'impressionist', '~> 2.0.0'
 
 # Manipulate images via ImageMagick | GraphicsMagick
 # gem 'mini_magick', '~> 4.10', '>= 4.10.1'

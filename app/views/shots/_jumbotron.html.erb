@@ -1,0 +1,11 @@
+<% if !user_signed_in? %>
+  <% content_for(:jumbotron) do %>
+  <div class="jumbotron">
+    <h1>Dribble Clone</h1>
+    <p>What are you working on? <span>Dribble is where designers get inspired and hired.</span></p>
+    <p>
+      <%= link_to('Login', new_user_session_path, class: 'btn btn-primary btn-lg', html_options: {role: 'button'}) %>
+    </p>
+  </div>
+  <% end %>
+<% end %>

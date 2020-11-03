@@ -53,15 +53,32 @@
       <!-- <li class="nav-header"></li> -->
       <li>
         <span class="icon"><i class="fa fa-eye"></i></span>
-        1 Views
+        <%# Error in impressionist %>
+        <%#= pluralize(@shot.impressionist_count, 'View') %>
       </li>
       <li>
         <span class="icon"><i class="fa fa-comment"></i></span>
         <%= pluralize(@shot.comments.count, 'Comment') %>
       </li>
       <li>
-        <span class="icon"><i class="fa fa-heart"></i></span>
-        1 Like(s)
+      <% if user_signed_in? %>
+        <% if current_user.liked? @shot %>
+            <%= link_to unlike_shot_path(@shot), method: :put, class: 'unlike_shot' do %>
+              <span class="icon"><i class="fa fa-heart"></i></span>
+              <span><%= pluralize(@shot.get_likes.size, 'Like') %></span>
+            <% end %>
+          <% else %>
+            <%= link_to like_shot_path(@shot), method: :put, class: 'like_shot' do %>
+              <span class="icon"><i class="fa fa-heart"></i></span>
+              <span><%= pluralize(@shot.get_likes.size, 'Like') %></span>
+            <% end %>
+          <% end %>
+          <% else %>
+            <%= link_to like_shot_path(@shot), method: :put, class: 'like_shot' do %>
+              <span class="icon"><i class="fa fa-heart"></i></span>
+              <span><%= pluralize(@shot.get_likes.size, 'Like') %></span>
+            <% end %>
+        <% end %>
       </li>
     </ul>
   </div><!--/.well -->

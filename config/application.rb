@@ -26,7 +26,7 @@ module RailsProd
     config.site = {
       name: 'Dribble Clone'
     }
-    
+
     # Disable generators
     # config.generators.assets = false
     # config.generators.helper = false

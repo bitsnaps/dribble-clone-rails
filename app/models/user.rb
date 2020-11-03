@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :shots, dependent: :destroy # delete shots if the user gets deleted
   has_many :comments, dependent: :destroy
+
+  acts_as_voter
 end
